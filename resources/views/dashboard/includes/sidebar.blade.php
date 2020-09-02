@@ -102,7 +102,7 @@
             <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
                                                                                     data-i18n="nav.templates.main">{{__('admin/sidebar.settings')}}</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">انواع التوصيل</a>
+                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">{{__('admin/sidebar.shipping-method')}}</a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="{{route('edit.shipping.method','free')}}"
                                    data-i18n="nav.templates.vert.classic_menu">{{__('admin/sidebar.free-shipping')}}</a>

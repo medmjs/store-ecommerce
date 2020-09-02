@@ -24,7 +24,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
         Route::group(['prefix'=>'settings'],function (){
             Route::get('shipping-methode/{type}','SittingsController@editShippingMethods')->name('edit.shipping.method');
-            Route::put('shipping-methode','SittingsController@updateShippingMethods')->name('update.shipping.method');
+            Route::put('shipping-methode/{id}','SittingsController@updateShippingMethods')->name('update.shipping.method');
 
         });
 

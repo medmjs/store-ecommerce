@@ -41,7 +41,7 @@
                                 @include('dashboard.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('update.shipping.method')}}"
+                                        <form class="form" action="{{route('update.shipping.method',$shippingMethod->id)}}"
                                               method="post"
                                               enctype="multipart/form-data">
                                             @csrf
@@ -67,7 +67,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> قيمه التوصيل </label>
-                                                            <input type="number" value="$shippingMethod->plan_value" id="plain_value"
+                                                            <input type="number" value="{{$shippingMethod->plain_value}}" id="plain_value"
                                                                    class="form-control"
                                                                    placeholder="  "
                                                                    name="plain_value">
