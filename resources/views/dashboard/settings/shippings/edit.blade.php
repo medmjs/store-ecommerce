@@ -41,7 +41,7 @@
                                 @include('dashboard.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('update.shipping.method')}}"
+                                        <form class="form" action="{{route('update.shipping.method',$shippingMethod->id)}}"
                                               method="post"
                                               enctype="multipart/form-data">
                                             @csrf
