@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('login', function () {
     return 'user page login';
 })->name('login');
+
+
+Route::get('test', function () {
+    $cat = App\Models\Category::find(1);
+    $cat->makeVisible(['translations']);
+
+    return $cat;
+})->name('test');

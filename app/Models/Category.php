@@ -24,5 +24,20 @@ class Category extends Model
       'is_active'=>'boolean',
     ];
 
+    public function scopeParent($query){
+        return $query->whereNull('parent_id');
+    }
+    public function scopeSubcategory($query){
+        return $query->whereNotNull('parent_id');
+    }
+
+    public function getActive(){
+        return $this->is_active == 1 ? 'Active' : 'not Active';
+    }
+
+    public function _parent(){
+        return $this->belongsTo(self::class ,'parent_id');
+    }
+
 
 }

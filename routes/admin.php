@@ -35,6 +35,42 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
             Route::put('updateprofile','ProfileController@updateProfile')->name('update.admin.profile');
 
         });//end route profile
+
+        ########################### begin Categories #############################
+
+        Route::group(['prefix'=>'categories'],function(){
+
+            Route::get('/','mainCatigoriesController@index')->name('admin.mainCategories');
+            Route::get('create','mainCatigoriesController@create')->name('admin.mainCategories.create');
+            Route::post('store','mainCatigoriesController@store')->name('admin.mainCategories.store');
+            Route::get('edit/{id}','mainCatigoriesController@edit')->name('admin.maincategories.edit');
+            Route::post('update/{id}','mainCatigoriesController@update')->name('admin.maincategories.update');
+            Route::get('delete/{id}','mainCatigoriesController@delete')->name('admin.maincategories.delete');
+            Route::get('changeStatus/{id}','mainCatigoriesController@delete')->name('admin.maincategories.changeStatus');
+
+
+        });
+
+
+        ########################### End Categories ###############################
+        ########################### begin SubCategories ###############################
+        Route::group(['prefix'=>'subCategories'],function(){
+
+            Route::get('/','SubCatigoriesController@index')->name('admin.subCatigories');
+            Route::get('create','SubCatigoriesController@create')->name('admin.subCatigories.create');
+            Route::post('store','SubCatigoriesController@store')->name('admin.subCatigories.store');
+            Route::get('edit/{id}','SubCatigoriesController@edit')->name('admin.subCatigories.edit');
+            Route::post('update/{id}','SubCatigoriesController@update')->name('admin.subCatigories.update');
+            Route::get('delete/{id}','SubCatigoriesController@delete')->name('admin.subCatigories.delete');
+            Route::get('changeStatus/{id}','SubCatigoriesController@delete')->name('admin.subCatigories.changeStatus');
+
+
+        });
+
+        ########################### End SubCategories ###############################
+
+
+
     });
 
 
