@@ -70,6 +70,23 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         ########################### End SubCategories ###############################
 
 
+        ########################### begin Brand ###############################
+        Route::group(['prefix'=>'brands'],function(){
+
+            Route::get('/','BrandsController@index')->name('admin.brands');
+            Route::get('create','BrandsController@create')->name('admin.brands.create');
+            Route::post('store','BrandsController@store')->name('admin.brands.store');
+            Route::get('edit/{id}','BrandsController@edit')->name('admin.brands.edit');
+            Route::post('update/{id}','BrandsController@update')->name('admin.brands.update');
+            Route::get('delete/{id}','BrandsController@delete')->name('admin.brands.delete');
+            Route::get('changeStatus/{id}','BrandsController@delete')->name('admin.brands.changeStatus');
+
+
+        });
+
+        ########################### End brand ###############################
+
+
 
     });
 
