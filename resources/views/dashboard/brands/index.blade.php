@@ -61,7 +61,7 @@
                                                     <tr>
                                                         <td>{{$brands -> name}}</td>
                                                         <td>{{$brands -> getActive()}}</td>
-                                                        <td> <img style="width: 150px; height: 100px;" src="{{asset('assets/images/brands/'.$brands->photo)}} "></td>
+                                                        <td> <img style="width: 150px; height: 100px;" src="{{$brands->photo}} "></td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">

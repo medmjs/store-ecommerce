@@ -60,6 +60,30 @@ class BrandsController extends Controller
 
     public function update($id, BrandRequest $req)
     {
+        try {
+        if(!$req->has('is_active'))
+            $req->request->add(['is_active'=>0]);
+        else
+            $req->request->add(['is_active'=>1]);
+
+        $fileName ='';
+        if($req->has('photo')){
+            $fileName = uploadImage('brands',$req->photo);
+        }
+
+        $brnad = Brand::find($id);
+        $brnad->update(['is_active'=>$req->is_active,'photo'=>$fileName]);
+        $brnad->name = $req->name;
+        $brnad->save();
+
+        return redirect()->route('admin.brands')->with(['success'=>'مت العمليه بالنجاح']);
+        }catch (\Exception $ex){
+
+
+        }
+
+
+
     }
 
     public function delete($id)
