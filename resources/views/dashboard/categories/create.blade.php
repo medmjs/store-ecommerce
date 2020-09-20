@@ -104,10 +104,6 @@
                                                         </div>
                                                     </div>
 
-
-
-
-
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -116,16 +112,44 @@
                                                                    name="is_active"
                                                                    id="switcheryColor4"
                                                                    class="switchery" data-color="success"
-                                                                   />
+                                                            />
                                                             <label for="switcheryColor4"
-                                                                   class="card-title ml-1">الحالة  </label>
+                                                                   class="card-title ml-1">الحالة </label>
 
                                                             @error("is_active")
                                                             <span class="text-danger">{{$message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-6 hidden" id="maincategoryList">
+
+                                                        <div class="form-group mt-1">
+                                                           <select class="custom-select" id="categoryList"
+                                                                    name="mainCat">
+                                                                <option selected value=0 >select Main Category</option>
+                                                                @foreach($main as $cat)
+                                                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                                                @endforeach
+                                                            </select>
+
+
+                                                            @error("mainCat")
+                                                            <span class="text-danger">{{$message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 radio" id="maicategory">
+                                                        <label><input type="radio" name="optradio" checked>قسم رئيسي</label>
+                                                    </div>
+                                                    <div class="col-md-6 radio" id="subcategory">
+                                                        <label><input type="radio" name="optradio">قسم فرعي</label>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
 
@@ -151,4 +175,20 @@
         </div>
     </div>
 
+@stop
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $("#subcategory").click(function () {
+                $("#maincategoryList").removeClass('hidden');
+
+            });
+            $("#maicategory").click(function () {
+                $("#maincategoryList").addClass('hidden');
+
+            });
+
+        });
+
+    </script>
 @stop

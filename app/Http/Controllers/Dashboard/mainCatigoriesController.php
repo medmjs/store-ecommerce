@@ -26,17 +26,26 @@ class mainCatigoriesController extends Controller
 
     public function create()
     {
+        $main = Category::parent()->get();
 
-        return view('dashboard.categories.create');
+        return view('dashboard.categories.create',compact('main'));
     }
 
     public function store(MainCategoriesRequest $req)
     {
         //validation
+
         if (!$req->has('is_active'))
             $req->request->add(['is_active' => 0]);
         else
             $req->request->add(['is_active' => 1]);
+
+
+        if(!$req->has('mainCat')||($req->mainCat ==0))
+            $req->request->add(['parent_id'=>null]);
+        else
+            $req->request->add(['parent_id'=>$req->mainCat]);
+
 
 
         try {
