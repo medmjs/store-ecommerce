@@ -86,6 +86,20 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
         ########################### End brand ###############################
 
+        ########################### begin Tags ###############################
+        Route::group(['prefix'=>'tags'],function(){
+
+            Route::get('/','TagsController@index')->name('admin.tags');
+            Route::get('create','TagsController@create')->name('admin.tags.create');
+            Route::post('store','TagsController@store')->name('admin.tags.store');
+            Route::get('edit/{id}','TagsController@edit')->name('admin.tags.edit');
+            Route::post('update/{id}','TagsController@update')->name('admin.tags.update');
+            Route::get('delete/{id}','TagsController@delete')->name('admin.tags.delete');
+            Route::get('changeStatus/{id}','TagsController@delete')->name('admin.tags.changeStatus');
+        });
+
+        ########################### End brand ###############################
+
 
 
     });
