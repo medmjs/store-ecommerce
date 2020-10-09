@@ -16,7 +16,7 @@ class Category extends Model
 
     protected $translatedAttributes =['name'];
 
-    protected $fillable =['parent_id','slug','is_active'];
+    protected $fillable =['id','parent_id','slug','is_active'];
 
     protected $hidden =['translations'];//return translations when I  need it
 
@@ -30,6 +30,9 @@ class Category extends Model
     public function scopeSubcategory($query){
         return $query->whereNotNull('parent_id');
     }
+
+
+
 
     public function getActive(){
         return $this->is_active == 1 ? 'Active' : 'not Active';

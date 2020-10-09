@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Enumeration\categoryType;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MainCategoriesRequest extends FormRequest
@@ -25,6 +26,7 @@ class MainCategoriesRequest extends FormRequest
     {
         return [
             'name'=>'required',
+            'type'=>'required|in:'.categoryType::mainCategory .','.categoryType::subCategory ,
             'slug'=>'required|unique:categories,slug,'.$this->id
         ];
     }

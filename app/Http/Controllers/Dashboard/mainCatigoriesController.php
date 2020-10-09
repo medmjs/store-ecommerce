@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Enumeration\categoryType;
 use App\Http\Requests\MainCategoriesRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -26,8 +27,18 @@ class mainCatigoriesController extends Controller
 
     public function create()
     {
-        $main = Category::parent()->get();
+        //$main = Category::parent()->get();
+        $main = Category::get();
+        $arr = array();
+        $i=0;
+       foreach ($main as $m){
+           $arr[$i]=$m;
+           $j=0;
 
+           $arr[$i][$j]= Category::where('parent_id' , $m->id)->get();
+           $i++;
+       }
+       //return $arr;
         return view('dashboard.categories.create',compact('main'));
     }
 
@@ -35,10 +46,16 @@ class mainCatigoriesController extends Controller
     {
         //validation
 
+
         if (!$req->has('is_active'))
             $req->request->add(['is_active' => 0]);
         else
             $req->request->add(['is_active' => 1]);
+
+
+
+//        if($req->type == categoryType::mainCategory)
+//            $req->request->add(['parent_id'=>null]);
 
 
         if(!$req->has('mainCat')||($req->mainCat ==0))

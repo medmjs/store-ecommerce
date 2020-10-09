@@ -125,9 +125,9 @@
                                                     <div class="col-md-6 hidden" id="maincategoryList">
 
                                                         <div class="form-group mt-1">
-                                                           <select class="custom-select" id="categoryList"
+                                                            <select class="custom-select" id="categoryList"
                                                                     name="mainCat">
-                                                                <option selected value=0 >select Main Category</option>
+                                                                <option selected value=0>select Main Category</option>
                                                                 @foreach($main as $cat)
                                                                     <option value="{{$cat->id}}">{{$cat->name}}</option>
                                                                 @endforeach
@@ -141,16 +141,22 @@
                                                     </div>
                                                 </div>
 
+
+
+
                                                 <div class="row">
                                                     <div class="col-md-6 radio" id="maicategory">
-                                                        <label><input type="radio" name="optradio" checked>قسم رئيسي</label>
+                                                        <label><input type="radio" value="1"   name="type" checked>قسم
+                                                            رئيسي</label>
                                                     </div>
                                                     <div class="col-md-6 radio" id="subcategory">
-                                                        <label><input type="radio" name="optradio">قسم فرعي</label>
+                                                        <label><input type="radio" value="2" name="type">قسم فرعي</label>
                                                     </div>
                                                 </div>
 
                                             </div>
+
+
 
 
                                             <div class="form-actions">
