@@ -51,12 +51,16 @@ class Product extends Model
         return $this->belongsTo(Brand::class)->withDefault();
     }
 
-    public function category(){
+    public function categories(){
         return $this->belongsToMany(Category::class,'product_categories');
     }
 
-    public function tag(){
+    public function tags(){
         return $this->belongsToMany(Tag::class,'product_tags');
     }
 
+    public function getActive()
+    {
+        return $this->is_active == 1 ? 'Active' : 'not Active';
+    }
 }

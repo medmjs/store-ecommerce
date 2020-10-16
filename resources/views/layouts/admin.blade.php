@@ -54,6 +54,7 @@
     <!-- END Custom CSS-->
     @notify_css
     @yield('style')
+
     <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
     <style>
         body {

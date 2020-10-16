@@ -100,6 +100,29 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
         ########################### End brand ###############################
 
+        ########################### begin product ###############################
+        Route::group(['prefix'=>'product'],function(){
+
+            Route::get('/','ProductController@index')->name('admin.products');
+            Route::get('general-information','ProductController@create')->name('admin.products.general.create');
+            Route::post('store-general-information','ProductController@store')->name('admin.products.general.store');
+
+            Route::get('price/{id}','ProductController@getPrice')->name('admin.products.price.create');
+            Route::post('price','ProductController@storePrice')->name('admin.products.price.store');
+
+
+            Route::get('stock/{id}','ProductController@getStock')->name('admin.products.stock.create');
+            Route::post('stock','ProductController@storeStock')->name('admin.products.stock.store');
+
+
+
+            Route::get('edit/{id}','ProductController@edit')->name('admin.products.edit');
+            Route::post('update/{id}','ProductController@update')->name('admin.products.update');
+            Route::get('delete/{id}','ProductController@delete')->name('admin.products.delete');
+            Route::get('changeStatus/{id}','ProductController@changeStatus')->name('admin.products.changeStatus');
+        });
+
+        ########################### End brand ###############################
 
 
     });
