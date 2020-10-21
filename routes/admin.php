@@ -114,6 +114,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
             Route::get('stock/{id}','ProductController@getStock')->name('admin.products.stock.create');
             Route::post('stock','ProductController@storeStock')->name('admin.products.stock.store');
 
+            Route::get('image/{id}','ProductController@getImages')->name('admin.products.image.create');
+            Route::post('photo','ProductController@saveProductImages')->name('admin.products.photo.store');
+
 
 
             Route::get('edit/{id}','ProductController@edit')->name('admin.products.edit');

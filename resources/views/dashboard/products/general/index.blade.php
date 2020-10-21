@@ -70,7 +70,7 @@
                                                                 <a href="{{route('admin.products.price.create',$product -> id)}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">السعر</a>
 
-                                                                <a href=""
+                                                                <a href="{{route('admin.products.image.create',$product -> id)}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">الصور</a>
 
                                                                 <a href="{{route('admin.products.stock.create',$product -> id)}}"
