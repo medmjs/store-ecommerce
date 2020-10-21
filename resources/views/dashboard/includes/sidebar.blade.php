@@ -53,7 +53,7 @@
                 </ul>
             </li>
 
-            //////////
+
             <li class="nav-item"><a href="{{route('admin.brands')}}"><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الماركات  </span>
                     <span
@@ -68,7 +68,6 @@
                     </li>
                 </ul>
             </li>
-            //////////tags
 
             <li class="nav-item"><a href="{{route('admin.tags')}}"><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">Tags  </span>
@@ -85,7 +84,23 @@
                 </ul>
             </li>
 
-            ////////////tags
+
+            <li class="nav-item"><a href=""><i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">المنتاجات  </span>
+                    <span
+                        class="badge badge badge-success badge-pill float-right mr-2"></span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href="{{route('admin.products')}}"
+                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.products.general.create')}}" data-i18n="nav.dash.crypto">أضافة
+                            منتج جديد  </a>
+                    </li>
+                </ul>
+            </li>
+
+
 
             <li class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">المتاجر  </span>

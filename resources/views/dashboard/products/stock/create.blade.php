@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+
 @section('content')
 
     <div class="app-content content">
@@ -44,46 +45,27 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form"
-                                              action="{{route('admin.mainCategories.store')}}"
+                                              action="{{route('admin.products.stock.store')}}"
                                               method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
-
-
-                                            <div class="form-group">
-                                                <div class="text-center">
-                                                    <img
-                                                        src=""
-                                                        class="rounded-circle  height-150" alt="صورة القسم  ">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label> صوره القسم </label>
-                                                <label id="projectinput7" class="file center-block">
-                                                    <input type="file" id="file" name="photo">
-                                                    <span class="file-custom"></span>
-                                                </label>
-                                                @error('photo')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </div>
+                                            <input type="hidden" value="{{$product->id}}" name="product_id"/>
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات القسم </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات السعر </h4>
+
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> اسم القسم
+                                                            <label for="projectinput1"> كود  المنتج
                                                             </label>
-                                                            <input type="text" id="name"
+                                                            <input type="text" id="sku"
                                                                    class="form-control"
                                                                    placeholder="  "
-                                                                   value=""
-                                                                   name="name">
-                                                            @error("name")
+                                                                   value="{{$product->sku}}"
+                                                                   name="sku">
+                                                            @error("sku")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -91,72 +73,59 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> اسم بالرابط
+                                                            <label for="projectinput1">تتبع المستودع
                                                             </label>
-                                                            <input type="text" id="name"
-                                                                   class="form-control"
-                                                                   placeholder="  "
-                                                                   value=""
-                                                                   name="slug">
-                                                            @error("slug")
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <input type="checkbox" value="1"
-                                                                   name="is_active"
-                                                                   id="switcheryColor4"
-                                                                   class="switchery" data-color="success"
-                                                            />
-                                                            <label for="switcheryColor4"
-                                                                   class="card-title ml-1">الحالة </label>
-
-                                                            @error("is_active")
-                                                            <span class="text-danger">{{$message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6 hidden" id="maincategoryList">
-
-                                                        <div class="form-group mt-1">
-                                                            <select class="custom-select" id="categoryList"
-                                                                    name="mainCat">
-                                                                <option selected value=0>select Main Category</option>
-                                                                @foreach($main as $cat)
-                                                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                                                @endforeach
+                                                            <select name="manage_stock" class="select2 form-control" id="manageStock">
+                                                                <optgroup label="من فضلك أختر النوع ">
+                                                                    <option value="1">اتاحة التتبع</option>
+                                                                    <option value="0" selected>عدم اتاحه التتبع</option>
+                                                                </optgroup>
                                                             </select>
-
-
-                                                            @error("mainCat")
-                                                            <span class="text-danger">{{$message }}</span>
+                                                            @error('manage_stock')
+                                                            <span class="text-danger"> {{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
                                                 </div>
 
-
-
-
                                                 <div class="row">
-                                                    <div class="col-md-6 radio" id="maicategory">
-                                                        <label><input type="radio" value="1"   name="type" checked>قسم
-                                                            رئيسي</label>
+                                                    <!-- QTY  -->
+
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">حالة المنتج
+                                                            </label>
+                                                            <select name="in_stock" class="select2 form-control" >
+                                                                <optgroup label="من فضلك أختر  ">
+                                                                    <option value="1">متاح</option>
+                                                                    <option value="0">غير متاح </option>
+                                                                </optgroup>
+                                                            </select>
+                                                            @error('in_stock')
+                                                            <span class="text-danger"> {{$message}}</span>
+                                                            @enderror
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6 radio" id="subcategory">
-                                                        <label><input type="radio" value="2" name="type">قسم فرعي</label>
+
+
+                                                    <div class="col-md-6" style="display:none"  id="qtyDiv">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">الكمية
+                                                            </label>
+                                                            <input type="text" id="sku"
+                                                                   class="form-control"
+                                                                   placeholder="  "
+                                                                   value="{{$product->qty}}"
+                                                                   name="qty">
+                                                            @error("qty")
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
                                                     </div>
+
                                                 </div>
-
-                                            </div>
-
-
 
 
                                             <div class="form-actions">
@@ -184,17 +153,12 @@
 @stop
 @section('script')
     <script>
-        $(document).ready(function () {
-            $("#subcategory").click(function () {
-                $("#maincategoryList").removeClass('hidden');
-
-            });
-            $("#maicategory").click(function () {
-                $("#maincategoryList").addClass('hidden');
-
-            });
-
+        $(document).on('change','#manageStock',function(){
+            if($(this).val() == 1 ){
+                $('#qtyDiv').show();
+            }else{
+                $('#qtyDiv').hide();
+            }
         });
-
     </script>
 @stop

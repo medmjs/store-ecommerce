@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Enumeration\categoryType;
+use App\Rules\ProductQty;
 use Illuminate\Foundation\Http\FormRequest;
 
-class MainCategoriesRequest extends FormRequest
+class ProductStockRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,12 @@ class MainCategoriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
-            'type'=>'required|in:'.categoryType::mainCategory .','.categoryType::subCategory ,
-            'slug'=>'required|unique:categories,slug,'.$this->id
+            'sku'=>'nullable|min:3|max:10',
+            'manage_stock'=>'required|in:0,1',
+            'in_stock'=>'required|in:0,1',
+            //'qty'=>'required_if:manage_stock,==,1',
+            'qty'=>[new ProductQty($this->manage_stock)],            //anther way to create rols of valedation
+
         ];
     }
 }

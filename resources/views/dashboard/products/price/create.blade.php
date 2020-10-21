@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+
 @section('content')
 
     <div class="app-content content">
@@ -44,46 +45,26 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form"
-                                              action="{{route('admin.mainCategories.store')}}"
+                                              action="{{route('admin.products.price.store')}}"
                                               method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
-
-
-                                            <div class="form-group">
-                                                <div class="text-center">
-                                                    <img
-                                                        src=""
-                                                        class="rounded-circle  height-150" alt="صورة القسم  ">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label> صوره القسم </label>
-                                                <label id="projectinput7" class="file center-block">
-                                                    <input type="file" id="file" name="photo">
-                                                    <span class="file-custom"></span>
-                                                </label>
-                                                @error('photo')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </div>
+                                            <input type="hidden" value="{{$id}}" name="product_id"/>
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات القسم </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات السعر </h4>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> اسم القسم
+                                                            <label for="projectinput1"> سعر المنتج
                                                             </label>
-                                                            <input type="text" id="name"
+                                                            <input type="number" id="price"
                                                                    class="form-control"
                                                                    placeholder="  "
                                                                    value=""
-                                                                   name="name">
-                                                            @error("name")
+                                                                   name="price">
+                                                            @error("price")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -91,68 +72,71 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> اسم بالرابط
+                                                            <label for="projectinput1"> سعر خاص
                                                             </label>
-                                                            <input type="text" id="name"
+                                                            <input type="number" id="special_price"
                                                                    class="form-control"
                                                                    placeholder="  "
                                                                    value=""
-                                                                   name="slug">
-                                                            @error("slug")
+                                                                   name="special_price">
+                                                            @error("special_price")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
-
                                                 </div>
+
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <input type="checkbox" value="1"
-                                                                   name="is_active"
-                                                                   id="switcheryColor4"
-                                                                   class="switchery" data-color="success"
-                                                            />
-                                                            <label for="switcheryColor4"
-                                                                   class="card-title ml-1">الحالة </label>
-
-                                                            @error("is_active")
-                                                            <span class="text-danger">{{$message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6 hidden" id="maincategoryList">
-
-                                                        <div class="form-group mt-1">
-                                                            <select class="custom-select" id="categoryList"
-                                                                    name="mainCat">
-                                                                <option selected value=0>select Main Category</option>
-                                                                @foreach($main as $cat)
-                                                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                                                @endforeach
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">نوع السعر
+                                                            </label>
+                                                            <select name="special_price_type" class="select2 form-control" multiple>
+                                                                <optgroup label="من فضلك أختر النوع ">
+                                                                    <option value="percent">percent</option>
+                                                                    <option value="fixed">fixed</option>
+                                                                </optgroup>
                                                             </select>
-
-
-                                                            @error("mainCat")
-                                                            <span class="text-danger">{{$message }}</span>
+                                                            @error('special_price_type')
+                                                            <span class="text-danger"> {{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
                                                 </div>
 
+                                                    <div class="row" >
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="projectinput1"> تاريخ البداية
+                                                                </label>
 
+                                                                <input type="date" id="price"
+                                                                       class="form-control"
+                                                                       placeholder="  "
+                                                                       value="{{old('special_price_start')}}"
+                                                                       name="special_price_start">
 
+                                                                @error('special_price_start')
+                                                                <span class="text-danger"> {{$message}}</span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
 
-                                                <div class="row">
-                                                    <div class="col-md-6 radio" id="maicategory">
-                                                        <label><input type="radio" value="1"   name="type" checked>قسم
-                                                            رئيسي</label>
-                                                    </div>
-                                                    <div class="col-md-6 radio" id="subcategory">
-                                                        <label><input type="radio" value="2" name="type">قسم فرعي</label>
-                                                    </div>
-                                                </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="projectinput1"> تاريخ الأنتهاء
+                                                                </label>
+                                                                <input type="date" id="price"
+                                                                       class="form-control"
+                                                                       placeholder="  "
+                                                                       value="{{old('special_price_end')}}"
+                                                                       name="special_price_end">
+
+                                                                @error('special_price_end')
+                                                                <span class="text-danger"> {{$message}}</span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
 
                                             </div>
 
@@ -183,18 +167,6 @@
 
 @stop
 @section('script')
-    <script>
-        $(document).ready(function () {
-            $("#subcategory").click(function () {
-                $("#maincategoryList").removeClass('hidden');
-
-            });
-            $("#maicategory").click(function () {
-                $("#maincategoryList").addClass('hidden');
-
-            });
-
-        });
-
-    </script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
 @stop
