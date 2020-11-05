@@ -116,9 +116,28 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
             Route::get('image/{id}','ProductController@getImages')->name('admin.products.image.create');
             Route::post('photo','ProductController@saveProductImages')->name('admin.products.photo.store');
+            Route::post('photo/db','ProductController@saveProductImagesDB')->name('admin.products.photo.store.db');
 
 
+             Route::get('attribute','ProductController@viewAttribute')->name('admin.products.attribute');
+             Route::get('create','ProductController@createAttribute')->name('admin.products.create.attribute');
+             Route::post('saveAttripute','ProductController@saveAttribute')->name('admin.products.save.attribute');
+             Route::get('editAttripute/{id}','ProductController@editAttribute')->name('admin.products.edit.attribute');
+             Route::post('updateAttripute/{id}','ProductController@updateAttribute')->name('admin.products.update.attribute');
+             Route::get('deleteAttripute/{id}','ProductController@deleteAttribute')->name('admin.products.delete.attribute');
 
+             
+             Route::get('option','ProductController@viewOption')->name('admin.products.option');
+             Route::get('create','ProductController@createOption')->name('admin.products.create.Option');
+             Route::post('saveOption','ProductController@saveOption')->name('admin.products.save.Option');
+             Route::get('editOption/{id}','ProductController@editOption')->name('admin.products.edit.Option');
+             Route::post('updateOption/{id}','ProductController@updateOptione')->name('admin.products.update.Option');
+             Route::get('deleteOption/{id}','ProductController@deleteOption')->name('admin.products.delete.Option');
+
+             
+             
+             
+             
             Route::get('edit/{id}','ProductController@edit')->name('admin.products.edit');
             Route::post('update/{id}','ProductController@update')->name('admin.products.update');
             Route::get('delete/{id}','ProductController@delete')->name('admin.products.delete');

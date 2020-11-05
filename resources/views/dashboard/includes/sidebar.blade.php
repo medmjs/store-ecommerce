@@ -97,6 +97,12 @@
                     <li><a class="menu-item" href="{{route('admin.products.general.create')}}" data-i18n="nav.dash.crypto">أضافة
                             منتج جديد  </a>
                     </li>
+                     <li><a class="menu-item" href="{{route('admin.products.attribute')}}" data-i18n="nav.dash.crypto">عرض خصائص المنتج
+                              </a>
+                    </li>
+                     <li><a class="menu-item" href="{{route('admin.products.create.attribute')}}" data-i18n="nav.dash.crypto">اضافةخصائص
+                              </a>
+                    </li>
                 </ul>
             </li>
 
