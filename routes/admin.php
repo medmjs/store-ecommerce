@@ -126,15 +126,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
              Route::post('updateAttripute/{id}','ProductController@updateAttribute')->name('admin.products.update.attribute');
              Route::get('deleteAttripute/{id}','ProductController@deleteAttribute')->name('admin.products.delete.attribute');
 
-             
-             Route::get('option','ProductController@viewOption')->name('admin.products.option');
-             Route::get('create','ProductController@createOption')->name('admin.products.create.Option');
-             Route::post('saveOption','ProductController@saveOption')->name('admin.products.save.Option');
-             Route::get('editOption/{id}','ProductController@editOption')->name('admin.products.edit.Option');
-             Route::post('updateOption/{id}','ProductController@updateOptione')->name('admin.products.update.Option');
-             Route::get('deleteOption/{id}','ProductController@deleteOption')->name('admin.products.delete.Option');
+             Route::get('option','OptionController@viewOption')->name('admin.Option');
+             Route::get('createOption','OptionController@createOption')->name('admin.Option.create');
+             Route::post('saveOption','OptionController@saveOption')->name('admin.Option.save');
+             Route::get('editOption/{id}','OptionController@editOption')->name('admin.Option.edit');
+             Route::post('updateOption/{id}','OptionController@updateOption')->name('admin.Option.update');
+             Route::get('deleteOption/{id}','OptionController@deleteOption')->name('admin.Option.delete');
 
-             
+               
              
              
              

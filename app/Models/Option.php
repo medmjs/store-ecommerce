@@ -16,7 +16,7 @@ class Option extends Model
 
     protected $translatedAttributes =['name'];
 
-    protected $fillable =['id','product_id','attribute_id'];
+    protected $fillable =['id','product_id','attribute_id','price'];
 
     protected $hidden =['translations'];//return translations when I  need it
 
