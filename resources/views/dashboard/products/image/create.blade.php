@@ -44,7 +44,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form"
-                                              action="{{route('admin.products.photo.store')}}"
+                                              action="{{route('admin.products.photo.store.db')}}"
                                               method="POST"
                                                enctype="multipart/form-data">
                                             @csrf

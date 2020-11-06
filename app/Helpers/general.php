@@ -8,8 +8,8 @@ function getFile(){
 
 function uploadImage($folder,$image){
 
-    //$image->store('/', $folder);
-    //$fileName = $image->hashName();
-    return $folder." ".$image;
+    $image->store('/', $folder);
+    $fileName = $image->hashName();
+    return $fileName;
 
 }

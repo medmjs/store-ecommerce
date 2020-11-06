@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductPriceRequest;
 use App\Http\Requests\ProductStockRequest;
+use App\Http\Requests\ProductImageRequest;
+use App\Http\Requests\AttributeRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -105,13 +108,87 @@ class ProductController extends Controller {
 
     public function saveProductImages(Request $request ){
 
+        return $request;
         $file = $request->file('dzfile');
         $filename = uploadImage('products', $file);
 
-        return $filename;
+        return response()->json([
+            'name' => $filename,
+            'original_name' => $file->getClientOriginalName(),
+        ]);
 
     }
+    
+    public function saveProductImagesDB(Request $req){
+        return $req;
+    }
+    
+    
+    public function viewAttribute(){
+        
+        $atrribute = Attribute::orderBy('id','DESC')->paginate(PAGENATION_COUNT);
+        return view('dashboard.products.attribute.index', compact('atrribute'));
+    }
+    
+    public function createAttribute(){
+        return view("dashboard.products.attribute.create");
+    }
+    
+    public function saveAttribute(AttributeRequest $req){
+        
+        try{
+            DB::beginTransaction();
+        $attribute = Attribute::create();
+        $attribute ->name =$req->name;
+        $attribute->save();
+        DB::commit();
+       
+            return redirect()->route('admin.products.attribute')->with(['success' => 'تمت اضافة خاصيه جديده ']);
+        }catch(\Exception $ex){
+            DB::rollback();
+            return redirect()->back()->with(['error' => 'هنالك خطا ']);
+        }
+        
+    }
 
+    public function editAttribute($id){
+        $attribute = Attribute::find($id);
+        return view('dashboard.products.attribute.edit', compact('attribute'));
+    }
+    
+    public function updateAttribute(AttributeRequest $req,$id){
+         try{
+             
+            DB::beginTransaction();
+        $attribute = Attribute::find($id);
+        $attribute ->name =$req->name;
+        $attribute->save();
+        DB::commit();
+       
+            return redirect()->route('admin.products.attribute')->with(['success' => 'تمت تعديل خاصيه جديده ']);
+        }catch(\Exception $ex){
+            DB::rollback();
+            return redirect()->back()->with(['error' => 'هنالك خطا ']);
+        }
+    }
+    
+    public function deleteAttribute($id){
+      
+        try{
+            DB::beginTransaction();
+        $attribute = Attribute::find($id);
+        $attribute->translations[0]->delete();
+        $attribute->delete();
+        DB::commit();
+       
+            return redirect()->route('admin.products.attribute')->with(['success' => 'تمت حذف خاصيه  ']);
+        }catch(\Exception $ex){
+            DB::rollback();
+            return redirect()->back()->with(['error' => 'هنالك خطا ']);
+        }
+    }
+
+    
     public function update(array $data, $id) {
         
     }

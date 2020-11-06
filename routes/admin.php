@@ -116,9 +116,27 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
             Route::get('image/{id}','ProductController@getImages')->name('admin.products.image.create');
             Route::post('photo','ProductController@saveProductImages')->name('admin.products.photo.store');
+            Route::post('photo/db','ProductController@saveProductImagesDB')->name('admin.products.photo.store.db');
 
 
+             Route::get('attribute','ProductController@viewAttribute')->name('admin.products.attribute');
+             Route::get('create','ProductController@createAttribute')->name('admin.products.create.attribute');
+             Route::post('saveAttripute','ProductController@saveAttribute')->name('admin.products.save.attribute');
+             Route::get('editAttripute/{id}','ProductController@editAttribute')->name('admin.products.edit.attribute');
+             Route::post('updateAttripute/{id}','ProductController@updateAttribute')->name('admin.products.update.attribute');
+             Route::get('deleteAttripute/{id}','ProductController@deleteAttribute')->name('admin.products.delete.attribute');
 
+             Route::get('option','OptionController@viewOption')->name('admin.Option');
+             Route::get('createOption','OptionController@createOption')->name('admin.Option.create');
+             Route::post('saveOption','OptionController@saveOption')->name('admin.Option.save');
+             Route::get('editOption/{id}','OptionController@editOption')->name('admin.Option.edit');
+             Route::post('updateOption/{id}','OptionController@updateOption')->name('admin.Option.update');
+             Route::get('deleteOption/{id}','OptionController@deleteOption')->name('admin.Option.delete');
+
+               
+             
+             
+             
             Route::get('edit/{id}','ProductController@edit')->name('admin.products.edit');
             Route::post('update/{id}','ProductController@update')->name('admin.products.update');
             Route::get('delete/{id}','ProductController@delete')->name('admin.products.delete');

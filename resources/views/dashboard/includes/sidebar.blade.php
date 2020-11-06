@@ -99,6 +99,37 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item"><a href=""><i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">الخصائص  </span>
+                    <span
+                        class="badge badge badge-success badge-pill float-right mr-2"></span>
+                </a>
+                <ul class="menu-content">
+                    
+                     <li><a class="menu-item" href="{{route('admin.products.attribute')}}" data-i18n="nav.dash.crypto">عرض خصائص المنتج
+                              </a>
+                    </li>
+                     <li><a class="menu-item" href="{{route('admin.products.create.attribute')}}" data-i18n="nav.dash.crypto">اضافةخصائص
+                              </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="nav-item"><a href=""><i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">قيم الخصائص  </span>
+                    <span
+                        class="badge badge badge-success badge-pill float-right mr-2"></span>
+                </a>
+                <ul class="menu-content">
+                    
+                     <li><a class="menu-item" href="{{route('admin.Option')}}" data-i18n="nav.dash.crypto">عرض قيم الخصاص
+                              </a>
+                    </li>
+                     <li><a class="menu-item" href="{{route('admin.Option.create')}}" data-i18n="nav.dash.crypto">اضافةقيم 
+                              </a>
+                    </li>
+                </ul>
+            </li>
 
 
 
