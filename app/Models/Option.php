@@ -42,7 +42,7 @@ class Option extends Model
         return $this->belongsTo(Product::class,'product_id');
     }
     
-     public function attripute() {
+     public function attribute() {
         return $this->belongsTo(Attribute::class,'attribute_id');
         
     }

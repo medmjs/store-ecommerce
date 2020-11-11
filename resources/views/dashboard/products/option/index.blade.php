@@ -49,7 +49,9 @@
                                         <thead class="">
                                             <tr>
                                                 <th>الاسم </th>
-
+                                                <th> السعر</th>
+                                                <th>المنتج </th>
+                                                <th>الخصائص </th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                         </thead>
@@ -59,13 +61,16 @@
                                             @foreach($options as $option)
                                             <tr>
                                                 <td>{{$option -> name}}</td>
+                                                <td>{{$option -> price}}</td>
+                                                <td>{{$option -> product->name}}</td>
+                                                <td>{{$option -> attribute->name}}</td>
                                                 <td>
                                                     <div class="btn-group" role="group"
-                                                         aria-label="Basic example">
-                                                        <a href="{{route('admin.products.edit.attribute',$att ->id)}}"
+                                                     الاسم    aria-label="Basic example">
+                                                        <a href="{{route('admin.products.edit.attribute',$option ->id)}}"
                                                            class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">التعديل</a>
 
-                                                        <a href="{{route('admin.products.delete.attribute',$att ->id)}}"
+                                                        <a href="{{route('admin.products.delete.attribute',$option ->id)}}"
                                                            class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">الحذف</a>
 
                                                     </div>
