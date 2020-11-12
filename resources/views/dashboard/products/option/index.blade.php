@@ -67,10 +67,10 @@
                                                 <td>
                                                     <div class="btn-group" role="group"
                                                      الاسم    aria-label="Basic example">
-                                                        <a href="{{route('admin.products.edit.attribute',$option ->id)}}"
+                                                        <a href="{{route('admin.Option.edit',$option ->id)}}"
                                                            class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">التعديل</a>
 
-                                                        <a href="{{route('admin.products.delete.attribute',$option ->id)}}"
+                                                        <a href="{{route('admin.Option.delete',$option ->id)}}"
                                                            class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">الحذف</a>
 
                                                     </div>

@@ -6,7 +6,7 @@
                         class="menu-title" data-i18n="nav.add_on_drag_drop.main">الرئيسية </span></a>
             </li>
 
-            <li class="nav-item  open ">
+            <li class="nav-item closed ">
                 <a href=""><i class="la la-home"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">لغات الموقع </span>
                     <span
@@ -23,7 +23,7 @@
             </li>
 
 
-            <li class="nav-item"><a href=""><i class="la la-group"></i>
+            <li class="nav-item hover"><a href=""><i class="la la-group"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الاقسام الرئيسيه </span>
                     <span
                         class="badge badge badge-danger badge-pill float-right mr-2"></span>
@@ -38,7 +38,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item"><a href="{{route('admin.subCatigories')}}"><i class="la la-group"></i>
+            <li class="nav-item "><a href="{{route('admin.subCatigories')}}"><i class="la la-group"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الاقسام الفرعية   </span>
                     <span
                         class="badge badge badge-danger badge-pill float-right mr-2">400</span>
@@ -74,7 +74,7 @@
                     <span
                         class="badge badge badge-success badge-pill float-right mr-2"></span>
                 </a>
-                <ul class="menu-content">
+                <ul class="menu-content closed">
                     <li class="active"><a class="menu-item" href="{{route('admin.tags')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>

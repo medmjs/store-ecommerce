@@ -52,37 +52,47 @@ class OptionController extends Controller {
         }
     }
 
-    public function editAttribute($id) {
-        $attribute = Attribute::find($id);
-        return view('dashboard.products.attribute.edit', compact('attribute'));
+    public function editOption($id) {
+        $data = [];
+        $option = Option::find($id);
+        $data['product'] = Product::active()->select('id')->get();
+        $data['attribute'] = Attribute::select('id')->get();
+       
+        return view('dashboard.products.option.edit', compact('option','data'));
     }
 
-    public function updateAttribute(AttributeRequest $req, $id) {
+    public function updateOption(OptionRequest $req, $id) {
         try {
 
             DB::beginTransaction();
-            $attribute = Attribute::find($id);
-            $attribute->name = $req->name;
-            $attribute->save();
+            $option = Option::find($id);
+            
+            $option->update([
+                'product_id'=>$req->product,
+                'attribute_id'=>$req->attribute,
+                'price'=>$req->price,
+            ]);
+            $option->name = $req->name;
+            $option->save();
             DB::commit();
 
-            return redirect()->route('admin.products.attribute')->with(['success' => 'تمت تعديل خاصيه جديده ']);
+            return redirect()->route('admin.Option')->with(['success' => 'تمت تعديل قيمة خاصيه جديده ']);
         } catch (\Exception $ex) {
             DB::rollback();
             return redirect()->back()->with(['error' => 'هنالك خطا ']);
         }
     }
 
-    public function deleteAttribute($id) {
+    public function deleteOption($id) {
 
         try {
             DB::beginTransaction();
-            $attribute = Attribute::find($id);
-            $attribute->translations[0]->delete();
-            $attribute->delete();
+            $option = Option::find($id);
+            $option->translations[0]->delete();
+            $option->delete();
             DB::commit();
 
-            return redirect()->route('admin.products.attribute')->with(['success' => 'تمت حذف خاصيه  ']);
+            return redirect()->route('admin.Option')->with(['success' => 'تمت حذف قيمة خاصيه  ']);
         } catch (\Exception $ex) {
             DB::rollback();
             return redirect()->back()->with(['error' => 'هنالك خطا ']);
