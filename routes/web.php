@@ -24,3 +24,9 @@ Route::get('test', function () {
 
     return $cat;
 })->name('test');
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@home')->name('home');

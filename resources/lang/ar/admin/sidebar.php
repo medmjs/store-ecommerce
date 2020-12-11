@@ -7,4 +7,5 @@ return [
     'free-shipping'=>'التوصيل المجاني',
     'inner-shipping'=>'التوصيل الداخلي',
     'outer-shipping'=>'التوصيل الخارجي',
+    'slider'=>"الصور الرئيسيه ",
 ];

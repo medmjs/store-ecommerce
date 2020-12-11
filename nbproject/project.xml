@@ -12,6 +12,7 @@
             <word>endisset</word>
             <word>foreach</word>
             <word>isset</word>
+            <word>Lg</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

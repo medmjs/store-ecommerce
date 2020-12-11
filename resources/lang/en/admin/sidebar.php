@@ -7,4 +7,5 @@ return [
     'free-shipping'=>'Free-shipping',
     'inner-shipping'=>'Inner-shipping',
     'outer-shipping'=>'Outer-shipping',
+    'slider'=>"Slider",
 ];
