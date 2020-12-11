@@ -199,6 +199,13 @@
                                    data-i18n="nav.templates.vert.overlay_menu">Overlay Menu</a>
                             </li>
                         </ul>
+                        
+                        
+                        
+                         
+                        
+                        
+                        
                     </li>
                     <li><a class="menu-item" href="#" data-i18n="nav.templates.horz.main">Horizontal</a>
                         <ul class="menu-content">
@@ -211,6 +218,15 @@
                         </ul>
                     </li>
                 </ul>
+                
+                <ul class="menu-content">
+                            <li><a class="menu-item" href="{{route('admin.slider.index')}}"
+                                   data-i18n="nav.templates.vert.classic_menu">Slider</a>
+                            </li>
+                            <li><a class="menu-item" href="{{route('admin.slider.create')}}">اضافة صور</a>
+                            </li>
+                            
+                        </ul>
             </li>
             <li class=" navigation-header">
                 <span data-i18n="nav.category.layouts">Layouts</span><i class="la la-ellipsis-h ft-minus"

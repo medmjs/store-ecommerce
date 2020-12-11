@@ -1,7 +1,10 @@
 @extends('layouts.admin')
+
 @section('content')
 
-    <div class="app-content content">
+
+
+  <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
@@ -42,106 +45,112 @@
                                 @include('dashboard.includes.alerts.success')
                                 @include('dashboard.includes.alerts.errors')
                                 <div class="card-content collapse show">
+                                    
+                                    
+                                    
                                     <div class="card-body">
-                                        <form class="form"
-                                              action="{{route('admin.products.photo.store.db')}}"
-                                              method="POST"
-                                               enctype="multipart/form-data">
-                                            @csrf
-
-                                            <input type="hidden" name="product_id" value="{{$id}}">
-                                            <div class="form-body">
-
-                                                <h4 class="form-section"><i class="ft-home"></i> صور المنتج </h4>
-                                                <div class="form-group">
-                                                    <div id="dpz-multiple-files" class="dropzone dropzone-area">
-                                                        <div class="dz-message">يمكنك رفع اكثر من صوره هنا</div>
-                                                    </div>
-                                                    <br><br>
-                                                </div>
-
-
-                                            </div>
-
-
-                                            <div class="form-actions">
-                                                <button type="button" class="btn btn-warning mr-1"
-                                                        onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> تحديث
-                                                </button>
-                                            </div>
-                                        </form>
+                                        
+                                          <div class="panel-body">
+          <form id="dropzoneForm" class="dropzone" action="{{ route('dropzone.upload') }}" 
+                method="POST"
+                enctype="multipart/form-data">
+            @csrf
+               <input type="hidden" name="product_id" value="{{$id}}">
+                                         
+                                           
+          </form>
+          <div align="center">
+            <button type="button" class="btn btn-info" id="submit-all">Upload</button>
+          </div>
+        </div>
+                                      
 
                                     </div>
                                 </div>
+                                
+                                 
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-content collapse show">
+                                    <div class="row">
+                                        
+                                        @foreach ($images as $image)
+    
+
+
+                                        <div class="col-md-2" style="margin-bottom:16px;" align="center">
+                                            <img src="{{$image->photo}}" class="img-thumbnail" width="175" height="175" style="height:175px;width:200px;" />
+                                            <a href="{{route('dropzone.delete',$image -> id)}}"
+                                               class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
+
+                                        </div>
+                                        
+                                        @endforeach
+                                        
+
+                                    </div>
+
+                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
                 <!-- // Basic form layout section end -->
             </div>
+            <br/>
+            
         </div>
     </div>
 
+
+
+
+ @stop
+@section('script')
+   <script type="text/javascript">
+
+  Dropzone.options.dropzoneForm = {
+    autoProcessQueue : false,
+    acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
+
+    init:function(){
+      var submitButton = document.querySelector("#submit-all");
+      myDropzone = this;
+
+      submitButton.addEventListener('click', function(){
+        myDropzone.processQueue();
+      });
+
+      this.on("complete", function(){
+        if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
+        {
+          var _this = this;
+          _this.removeAllFiles();
+        }
+        load_images();
+      });
+
+    }
+
+  };
+
+  //load_images();
+
+  function load_images()
+  {
+    $.ajax({
+      url:"{{ route('dropzone.fetch') }}",
+      success:function(data)
+      {
+        $('#uploaded_image').html(data);
+      }
+    })
+  }
+
+ 
+
+</script>
 @stop
 
-@section('script')
 
-
-    <script>
-             var uploadedDocumentMap = {}
-            Dropzone.options.dpzMultipleFiles = {
-                paramName: "dzfile", // The name that will be used to transfer the file
-                //autoProcessQueue: false,
-                maxFilesize: 5, // MB
-                clickable: true,
-                addRemoveLinks: true,
-                acceptedFiles: 'image/*',
-                dictFallbackMessage: " المتصفح الخاص بكم لا يدعم خاصيه تعدد الصوره والسحب والافلات ",
-                dictInvalidFileType: "لايمكنك رفع هذا النوع من الملفات ",
-                dictCancelUpload: "الغاء الرفع ",
-                dictCancelUploadConfirmation: " هل انت متاكد من الغاء رفع الملفات ؟ ",
-                dictRemoveFile: "حذف الصوره",
-                dictMaxFilesExceeded: "لايمكنك رفع عدد اكثر من هضا ",
-                headers: {
-                    'X-CSRF-TOKEN':
-                        "{{ csrf_token() }}"
-                }
-                ,
-                url: "{{ route('admin.products.photo.store') }}", // Set the url
-                success:
-                    function (file, response) {
-                        $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
-                        uploadedDocumentMap[file.name] = response.name
-                    }
-                ,
-                removedfile: function (file) {
-                    file.previewElement.remove()
-                    var name = ''
-                    if (typeof file.file_name !== 'undefined') {
-                        name = file.file_name
-                    } else {
-                        name = uploadedDocumentMap[file.name]
-                    }
-                    $('form').find('input[name="document[]"][value="' + name + '"]').remove()
-                }
-                ,
-                // previewsContainer: "#dpz-btn-select-files", // Define the container to display the previews
-                init: function () {
-                        @if(isset($event) && $event->document)
-                    var files =
-                    {!! json_encode($event->document) !!}
-                        for (var i in files) {
-                        var file = files[i]
-                        this.options.addedfile.call(this, file)
-                        file.previewElement.classList.add('dz-complete')
-                        $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
-                    }
-                    @endif
-                }
-            }
-    </script>
-    @stop

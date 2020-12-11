@@ -11,9 +11,11 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\Image;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class ProductController extends Controller {
 
@@ -103,12 +105,13 @@ class ProductController extends Controller {
 
     public function getImages($id) {
 
-        return view('dashboard.products.image.create')->withId($id);
+        return view('dashboard.products.image.create2')->withId($id);
     }
 
     public function saveProductImages(Request $request ){
 
         return $request;
+        
         $file = $request->file('dzfile');
         $filename = uploadImage('products', $file);
 
@@ -121,6 +124,23 @@ class ProductController extends Controller {
     
     public function saveProductImagesDB(Request $req){
         return $req;
+        // try {
+            DB::beginTransaction();
+            //save dropzone images to db
+            if ($req->has('document') && count($req->document) > 0) {
+                foreach ($req->document as $image) {
+                    Image::create([
+                        'product_id' => $req->product_id,
+                        'photo' => $image,
+                    ]);
+                }
+            }
+            DB::commit();
+            return redirect()->route('admin.products')->with(['success' => 'updated successfully']);
+       // } catch (\Exception $ex) {
+            DB::rollBack();
+            return redirect()->route('admin.products')->with(['error' => 'هناك خطأ ما']);
+        //}
     }
     
     
